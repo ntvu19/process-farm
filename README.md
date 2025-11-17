@@ -2,10 +2,13 @@
 Orchestrate the processes within the same machine with highest performance
 
 ## Components
-- Service Discovery
-    - This is where all agents are registered
+- Bootstrap Service
+    - The first service to be started
+    - Responsible for launching other components and services
 - Configuration Server
     - Store the configuration for the whole application
+- Service Discovery
+    - This is where all agents are registered
 - Distributed Tracing
     - Monitor service
 - Message Queue
