@@ -5,7 +5,7 @@ package ipc.core;
 import "google/protobuf/any.proto";
 
 // Main structure of the message
-message IpcPackage {
+message IpcPacket {
     Header              header  = 1;
     google.protobuf.Any payload = 2;
 }
