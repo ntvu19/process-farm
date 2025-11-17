@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package ipc.core;
+
+import "google/protobuf/any.proto";
+
+// Main structure of the message
+message IpcPackage {
+    Header              header  = 1;
+    google.protobuf.Any payload = 2;
+}
+
+message Header {
+    string              trace_id        = 1;    // Use for distributed tracing
+    string              source_service  = 2;    // Source service name
+    string              dest_service    = 3;    // Destination service name
+    int64               timestamp       = 4;
+    MessageType         message_type    = 5;
+    map<string, string> metadata        = 6;    // Extra metadata for the message
+}
+
+enum MessageType {
+    UNKNOWN     = 0;
+    REGISTER    = 1;    // Register a new service   
+    DISCONNECT  = 2;    // Disconnect a service (graceful shutdown)
+    DATA        = 3;    // Data message
+    ACK         = 4;    // Acknowledgment message (confirm the message is received)
+    ERROR       = 5;    // Error message
+    HEARTBEAT   = 6;    // Keep connection alive (optional)
+}
+
+message ErrorPayload {
+    int32   code                  = 1;
+    string  message               = 2;
+    string  original_trace_id     = 3;    // Original trace ID if available
+}
+
+message RegisterResponse {
+    bool    success               = 1;    // Whether the registration is successful
+    string  assigned_id           = 2;    // Assigned ID for the service, provided by IPC Hub
+}
