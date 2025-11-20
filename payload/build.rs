@@ -1,5 +1,5 @@
 const OUT_DIR: &str = "generated";
-const PROTO_FILE: &str = "ipc_transport.proto";
+const PROTO_FILE: &str = "proto/ipc_transport.proto";
 
 fn main() {
     // Create the folder if it doesn't exist
